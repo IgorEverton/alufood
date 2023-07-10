@@ -1,39 +1,34 @@
-import React, { useState } from "react";
-import style from './Cardapio.module.scss';
-import logo from 'assets/img/logo.svg';
-import Buscador from "pages/Cardapio/Buscador";
-import Filtro from "./Filtros";
+import styles from "./Cardapio.module.scss";
+import { ReactComponent as Logo } from "assets/logo.svg";
+import Buscador from "./Buscador";
+import { useState } from "react";
+import Filtros from "./Filtros";
 import Ordenador from "./Ordenador";
-import Itens from './Itens/index';
+import Itens from './Itens';
 
-export default function Cardapio(){
+export default function Cardapio() {
   const [busca, setBusca] = useState("");
   const [filtro, setFiltro] = useState<number | null>(null);
   const [ordenador, setOrdenador] = useState("");
-  return(
+  return (
     <main>
-      <nav className={style.menu}>
-        <img src={logo} alt="Logo AluFood"></img>
+      <nav className={styles.menu}>
+        <Logo />
       </nav>
-      <header className={style.header}>
-        <div className={style.header__text}>
-          A casa do código da Massa
+      <header className={styles.header}>
+        <div className={styles.header__text}>
+          A casa do código e da massa
         </div>
       </header>
-      <section className={style.cardapio}>
-        <h3 className={style.cardapio__titulo}>
-          Cardápio
-        </h3>
-        <div className={style.cardapio__filtros}>
-          <Filtro filtro={filtro} setFiltro={setFiltro}/>
-          <Ordenador ordenador={ordenador} setOrdenador={setOrdenador}/>
+      <section className={styles.cardapio}>
+        <h3 className={styles.cardapio__titulo}>Cardápio</h3>
+        <Buscador busca={busca} setBusca={setBusca} />
+        <div className={styles.cardapio__filtros}>
+          <Filtros filtro={filtro} setFiltro={setFiltro} />
+          <Ordenador ordenador={ordenador} setOrdenador={setOrdenador} />
         </div>
-        <Itens/>
+        <Itens busca={busca} filtro={filtro} ordenador={ordenador} />
       </section>
-      <Buscador 
-        busca={busca}
-        setBusca={setBusca}
-        />
     </main>
-    );
+  )
 }
